@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>The Art Studio (Art By Shikha) | Shipping Label Studio</title>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: #f4f5f7;
+            color: #20242c;
+            font: 14px/1.45 system-ui, Segoe UI, Arial, sans-serif
+        }
+
+        header {
+            background: #171b24;
+            color: white;
+            padding: 19px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .mark {
+            background: #d5b16a;
+            color: #171b24;
+            font-size: 20px;
+            font-weight: 800;
+            border-radius: 9px;
+            padding: 9px 13px
+        }
+
+        h1 {
+            font-size: 19px;
+            margin: 0
+        }
+
+        .sub {
+            font-size: 12px;
+            color: #adb6c4
+        }
+
+        .tag {
+            border: 1px solid #58606c;
+            border-radius: 5px;
+            padding: 6px 10px;
+            font-size: 12px
+        }
+
+        .main {
+            max-width: 1250px;
+            margin: auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(350px, 1fr);
+            gap: 24px
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #e0e3e8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px
+        }
+
+        .section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 13px
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 16px
+        }
+
+        h3 {
+            margin: 0 0 10px;
+            font-size: 14px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px
+        }
+
+        .wide {
+            grid-column: 1/-1
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 650;
+            color: #46505e;
+            margin-bottom: 4px
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            border: 1px solid #cdd2da;
+            border-radius: 6px;
+            background: #fff;
+            color: #181b20;
+            font: inherit;
+            padding: 9px 10px;
+            outline: none
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #a77e35;
+            box-shadow: 0 0 0 2px #e7d9b7
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 58px
+        }
+
+        button {
+            font: inherit;
+            font-weight: 650;
+            cursor: pointer;
+            border-radius: 7px;
+            border: 1px solid #cdd2da;
+            padding: 10px 13px;
+            background: white;
+            color: #222
+        }
+
+        button.primary {
+            background: #171b24;
+            color: white;
+            border-color: #171b24
+        }
+
+        button:disabled {
+            opacity: .45;
+            cursor: not-allowed
+        }
+
+        .preview {
+            position: sticky;
+            top: 18px;
+            align-self: start
+        }
+
+        .preview .panel {
+            padding: 18px
+        }
+
+        .stage {
+            background: #e9ecf0;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            overflow: auto
+        }
+
+        #label {
+            display: block;
+            width: min(100%, 384px);
+            height: auto;
+            background: white;
+            box-shadow: 0 2px 8px #0002;
+            flex-shrink: 0
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 15px
+        }
+
+        .buttons .primary {
+            grid-column: 1/-1
+        }
+
+        .note {
+            font-size: 12px;
+            color: #586171;
+            margin: 12px 0 0
+        }
+
+        .error {
+            color: #a12626;
+            font-size: 13px;
+            font-weight: 600;
+            min-height: 20px;
+            margin: 10px 0 0
+        }
+
+        .small {
+            font-size: 12px;
+            color: #69717c
+        }
+
+        .reset {
+            padding: 6px 10px;
+            font-size: 12px
+        }
+
+        .ok {
+            color: #286640;
+            font-size: 12px;
+            font-weight: 600
+        }
+
+        #amount:disabled {
+            background: #f0f1f3;
+            color: #696969
+        }
+
+        @media(max-width:800px) {
+            .main {
+                grid-template-columns: 1fr;
+                padding: 12px
+            }
+
+            .preview {
+                position: static
+            }
+
+            header {
+                padding: 12px
+            }
+
+            .stage {
+                padding: 12px
+            }
+        }
+
+        @page {
+            size: 4in 6in;
+            margin: 0
+        }
+
+        @media print {
+
+            html,
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 4in !important;
+                height: 6in !important;
+                background: white !important
+            }
+
+            header,
+            .editor,
+            .preview .section,
+            .buttons,
+            .note,
+            .error {
+                display: none !important
+            }
+
+            .main,
+            .preview,
+            .preview .panel,
+            .stage {
+                display: block !important;
+                position: static !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: 0 !important;
+                border-radius: 0 !important;
+                background: white !important;
+                width: 4in !important;
+                max-width: none !important;
+                height: 6in !important;
+                overflow: visible !important
+            }
+
+            #label {
+                width: 4in !important;
+                height: 6in !important;
+                box-shadow: none !important;
+                max-width: none !important;
+                display: block !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="brand">
+            <div class="mark">TAS</div>
+            <div>
+                <h1>The Art Studio (Art By Shikha) · Shipping Label Studio</h1>
+                <div class="sub">Single label generator / offline</div>
+            </div>
+        </div>
+        <div class="tag">4 × 6 in · CODE 128</div>
+    </header>
+    <main class="main">
+        <div class="editor">
+            <form id="form">
+                <div class="panel">
+                    <div class="section">
+                        <h2>01 · Shipment details</h2><button type="button" class="reset" id="clear">New label</button>
+                    </div>
+                    <div class="grid">
+                        <div class="wide"><label for="awb">AWB number *</label><input id="awb" maxlength="24" required
+                                value="AWB784512963" autocomplete="off"></div>
+                        <div><label for="mode">Payment mode</label><select id="mode">
+                                <option>COD</option>
+                                <option>PREPAID</option>
+                            </select></div>
+                        <div><label for="amount">Collectible amount (Rs.)</label><input id="amount" type="number"
+                                min="0" max="9999999" step="0.01" value="1000"></div>
+                        <div><label for="order">Order ID</label><input id="order" maxlength="35" value="#RES-108"></div>
+                        <div><label for="weight">Weight (kg)</label><input id="weight" maxlength="12" value="0.15">
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h2>02 · Deliver to</h2>
+                    <div class="grid" style="margin-top:13px">
+                        <div class="wide"><label for="name">Customer name *</label><input id="name" maxlength="90"
+                                value="Priya Patel (Resin Art Studio)"></div>
+                        <div class="wide"><label for="address">Delivery address *</label><textarea id="address"
+                                maxlength="240">B-304, Shyamal Residency, Near Prahlad Nagar Garden, Satellite</textarea>
+                        </div>
+                        <div><label for="city">City</label><input id="city" maxlength="60" value="Ahmedabad"></div>
+                        <div><label for="state">State</label><input id="state" maxlength="60" value="Gujarat"></div>
+                        <div><label for="pin">PIN code</label><input id="pin" inputmode="numeric" maxlength="12"
+                                value="380015"></div>
+                        <div><label for="mobile">Mobile</label><input id="mobile" maxlength="28"
+                                value="+91 98765 43210"></div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="section">
+                        <h2>03 · Sender & branding</h2><button type="button" class="reset" id="save">Save
+                            sender</button>
+                    </div>
+                    <div class="grid">
+                        <div class="wide"><label for="brand">Brand title</label><input id="brand" maxlength="60"
+                                value="THE ART STUDIO (ART BY SHIKHA)"></div>
+                        <div class="wide"><label for="subtitle">Subtitle</label><input id="subtitle" maxlength="70"
+                                value="RESIN ART VINYL STICKERS"></div>
+                        <div class="wide"><label for="sender">Sender name</label><input id="sender" maxlength="90"
+                                value="The Art Studio (Art By Shikha)"></div>
+                        <div class="wide"><label for="senderAddress">Return address</label><textarea id="senderAddress"
+                                maxlength="240">Shop No. 14, Ground Floor, Vastral Commercial Hub, Ahmedabad - 382418</textarea>
+                        </div>
+                        <div><label for="senderMobile">Sender mobile</label><input id="senderMobile" maxlength="28"
+                                value="+91 91234 56789"></div>
+                        <div><label for="ig">Instagram</label><input id="ig" maxlength="45" value="@theartstudio.artbyshikha">
+                        </div>
+                        <div class="wide"><label for="handling">Handling instruction</label><input id="handling"
+                                maxlength="85" value="DO NOT BEND (VINYL SHEETS)"></div>
+                    </div>
+                    <div class="small" id="saveStatus" aria-live="polite" style="margin-top:8px">Sender details can be
+                        saved in this browser for future labels.</div>
+                </div>
+            </form>
+        </div>
+        <div class="preview">
+            <div class="panel">
+                <div class="section">
+                    <h2>Live label preview</h2><span class="ok" id="status">Ready</span>
+                </div>
+                <div class="stage"><svg id="label" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288 432" role="img"
+                        aria-label="Shipping label preview"></svg></div>
+                <div id="error" class="error" role="alert"></div>
+                <div class="buttons"><button type="button" class="primary" id="print">Print 4 × 6 label</button><button
+                        type="button" id="pdf">Download PDF</button><button type="button" id="word">Download
+                        Word</button></div>
+                <p class="note">Use 4 × 6 in (101.6 × 152.4 mm), portrait, actual size / 100%. Disable browser headers
+                    and footers. Barcode follows the AWB exactly; use the AWB issued by your courier.</p>
+                <p class="note">English/ASCII text supported. Word export contains editable text and an embedded
+                    barcode; change AWB here and re-export to keep it synchronized.</p>
+            </div>
+        </div>
+    </main>
+    <script>
+        'use strict';
+        const P = ["212222", "222122", "222221", "121223", "121322", "131222", "122213", "122312", "132212", "221213", "221312", "231212", "112232", "122132", "122231", "113222", "123122", "123221", "223211", "221132", "221231", "213212", "223112", "312131", "311222", "321122", "321221", "312212", "322112", "322211", "212123", "212321", "232121", "111323", "131123", "131321", "112313", "132113", "132311", "211313", "231113", "231311", "112133", "112331", "132131", "113123", "113321", "133121", "313121", "211331", "231131", "213113", "213311", "213131", "311123", "311321", "331121", "312113", "312311", "332111", "314111", "221411", "431111", "111224", "111422", "121124", "121421", "141122", "141221", "112214", "112412", "122114", "122411", "142112", "142211", "241211", "221114", "413111", "241112", "134111", "111242", "121142", "121241", "114212", "124112", "124211", "411212", "421112", "421211", "212141", "214121", "412121", "111143", "111341", "131141", "114113", "114311", "411113", "411311", "113141", "114131", "311141", "411131", "211412", "211214", "211232", "2331112"], W = [278, 333, 474, 556, 556, 889, 722, 238, 333, 333, 389, 584, 278, 333, 278, 278, 556, 556, 556, 556, 556, 556, 556, 556, 556, 556, 333, 333, 584, 584, 584, 611, 975, 722, 722, 722, 722, 667, 611, 778, 722, 278, 556, 722, 611, 833, 722, 778, 667, 778, 722, 667, 611, 722, 667, 944, 667, 667, 611, 333, 278, 333, 584, 556, 333, 556, 611, 556, 611, 556, 333, 611, 611, 278, 278, 556, 278, 889, 611, 611, 611, 611, 389, 556, 333, 611, 556, 778, 556, 556, 500, 389, 280, 389, 584], $ = id => document.getElementById(id), ids = ['awb', 'mode', 'amount', 'order', 'weight', 'name', 'address', 'city', 'state', 'pin', 'mobile', 'brand', 'subtitle', 'sender', 'senderAddress', 'senderMobile', 'ig', 'handling'], senderIds = ['brand', 'subtitle', 'sender', 'senderAddress', 'senderMobile', 'ig', 'handling'];
+        const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[c]));
+        function data() { return Object.fromEntries(ids.map(k => [k, $(k).value.trim()])); }
+        function width(s, f) { return [...s].reduce((a, c) => a + (W[c.charCodeAt(0) - 32] || 600) * f / 1000, 0); }
+        function wrap(s, f, max) { let out = []; for (let para of s.split(/\n/)) { let line = ''; for (let word of para.trim().split(/\s+/).filter(Boolean)) { if (width(word, f) > max) { if (line) { out.push(line); line = ''; } let part = ''; for (let c of word) { if (width(part + c, f) > max) { out.push(part); part = ''; } part += c; } line = part; } else if (!line || width(line + ' ' + word, f) <= max) line += (line ? ' ' : '') + word; else { out.push(line); line = word; } } if (line) out.push(line); } return out.length ? out : ['']; }
+        function barcode(s) { let codes = [104, ...[...s].map(c => c.charCodeAt(0) - 32)]; let sum = codes[0]; for (let i = 1; i < codes.length; i++)sum += i * codes[i]; codes.push(sum % 103, 106); let runs = codes.flatMap(c => [...P[c]].map(Number)); let modules = runs.reduce((a, b) => a + b, 0) + 20; let dot = modules * 3 * 72 / 203 <= 242 ? 3 : 2; let unit = dot * 72 / 203; return { runs, modules, dot, unit, w: modules * unit }; }
+        function layout(d) { if (!d.awb || !d.name || !d.address) throw Error('Enter AWB, customer name and delivery address.'); if (!/^[\x20-\x7e]{1,24}$/.test(d.awb)) throw Error('AWB must be 1–24 printable ASCII characters.'); for (let k of ids) if (!/^[\x20-\x7e\n\r]*$/.test(d[k])) throw Error('Use English letters, numbers and standard punctuation: ' + k + '.'); if (d.mode === 'COD' && (!d.amount || !Number.isFinite(+d.amount) || +d.amount < 0 || +d.amount > 9999999)) throw Error('Enter a valid COD amount.'); let bc = barcode(d.awb); let rows; const line = (s, f, align = 'left') => ({ s, f, align, h: f + 1.8 }); const cell = (ss, f, align = 'left', max = 258) => wrap(ss, f, max).map(s => line(s, f, align)); function build(scale) { let f = 11.4 * scale, head = 10.4, name = 12.0 * scale; const row = (lines, p = 4) => ({ lines, p, h: lines.reduce((n, l) => n + l.h, 0) + p * 2 }); let left = [line('PAYMENT MODE', 9.4, 'center'), line(d.mode, 13.5, 'center')], amt = d.mode === 'COD' ? 'Rs. ' + (+d.amount).toLocaleString('en-IN', { maximumFractionDigits: 2 }) + ' (COD)' : 'Rs. 0 (PAID)'; let right = [line('COLLECTIBLE AMOUNT', 9.4, 'center'), ...cell(amt, 12.2, 'center', 128)]; return [row([...cell(d.brand, 14, 'center'), ...cell(d.subtitle, 11.5, 'center')], 3), { cols: [left, right], p: 3, h: Math.max(...[left, right].map(ls => ls.reduce((a, l) => a + l.h, 0))) + 6 }, row([line('AWB NUMBER', 10, 'center'), ...cell(d.awb, Math.min(16, 250 / width(d.awb, 1)), 'center')], 3), { barcode: bc, lines: [line(d.awb, Math.min(12.2, 250 / width(d.awb, 1)), 'center')], p: 3, h: 65 }, row([line('TO (DELIVER TO):', head)], 2), row([...cell(d.name, name), ...cell(d.address, f), ...cell('City/State: ' + [d.city, d.state].filter(Boolean).join(', ') + ' | PIN: ' + d.pin, f), ...cell('Mobile: ' + d.mobile, f)], 4), row([line('FROM (SENDER / RETURN ADDRESS):', head)], 2), row([...cell(d.sender, name), ...cell(d.senderAddress, f), ...cell('Mobile: ' + d.senderMobile, f), ...cell('IG: ' + d.ig, f)], 4), row([...cell(d.handling, 10.7, 'center'), ...cell('Order: ' + d.order + '  |  Wt: ' + d.weight + ' Kg', 10.7, 'center')], 3)]; } for (let scale of [1, .96, .92, .88, .84]) { rows = build(scale); if (rows.reduce((n, r) => n + r.h, 0) <= 412) break; } let total = rows.reduce((n, r) => n + r.h, 0); if (total > 412) throw Error('Address/details are too long for one 4 × 6 label. Shorten them.'); let extra = 412 - total; let barExtra = Math.min(extra, 18); rows[3].h += barExtra; extra -= barExtra; rows[5].h += extra / 2; rows[7].h += extra / 2; let y = 10; for (let r of rows) { r.y = y; y += r.h; } return { rows, bc, d }; }
+        function draw(l) { let a = []; const rect = (x, y, w, h) => a.push({ k: 'rect', x, y, w, h }); const txt = (s, x, y, f) => a.push({ k: 'text', s, x, y, f }); function lines(ls, x, y, w, h) { let yy = y + (h - ls.reduce((n, v) => n + v.h, 0)) / 2; for (let v of ls) { txt(v.s, v.align === 'center' ? x + (w - width(v.s, v.f)) / 2 : x + 4, yy + v.f, v.f); yy += v.h; } } rect(9.6, 10, 0.8, 412); rect(277.6, 10, 0.8, 412); rect(10, 9.6, 268, 0.8); for (let r of l.rows) { if (r.cols) { rect(143.6, r.y, .8, r.h); lines(r.cols[0], 10, r.y, 134, r.h); lines(r.cols[1], 144, r.y, 134, r.h); } else if (r.barcode) { let b = r.barcode; let barH = r.h - 22; let x = (288 - b.w) / 2 + 10 * b.unit; let y = r.y + 4; let ink = true; for (let n of b.runs) { if (ink) rect(x, y, n * b.unit, barH); x += n * b.unit; ink = !ink; } lines(r.lines, 10, r.y + barH + 4, 268, r.h - barH - 4); } else lines(r.lines, 10, r.y, 268, r.h); rect(10, r.y + r.h - .4, 268, .8); } return a; }
+        function preview(l) { $('label').innerHTML = '<rect width="288" height="432" fill="white"/>' + draw(l).map(o => o.k === 'rect' ? `<rect x="${o.x}" y="${o.y}" width="${o.w}" height="${o.h}" fill="black"/>` : `<text x="${o.x}" y="${o.y}" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="${o.f}" fill="black">${esc(o.s)}</text>`).join(''); }
+        let current = null; function update() { let d = data(); $('amount').disabled = d.mode === 'PREPAID'; try { current = layout(d); preview(current); $('error').textContent = ''; $('status').textContent = 'Ready · 1 label'; } catch (e) { current = null; $('label').innerHTML = '<rect width="288" height="432" fill="white"/><text x="144" y="210" font-size="12" text-anchor="middle" fill="#555">Complete or shorten the details</text>'; $('error').textContent = e.message; $('status').textContent = 'Check details'; } for (let k of ['print', 'pdf', 'word']) $(k).disabled = !current; }
+        const enc = new TextEncoder(), bytes = s => enc.encode(s), cat = arr => { let a = new Uint8Array(arr.reduce((n, x) => n + x.length, 0)), p = 0; for (let x of arr) { a.set(x, p); p += x.length; } return a; };
+        function pdf(l) { let n = x => Number(x.toFixed(4)), ps = s => s.replace(/[\\()]/g, '\\$&'); let stream = '0 g\n' + draw(l).map(o => o.k === 'rect' ? `${n(o.x)} ${n(432 - o.y - o.h)} ${n(o.w)} ${n(o.h)} re f` : `BT /F1 ${n(o.f)} Tf 1 0 0 1 ${n(o.x)} ${n(432 - o.y)} Tm (${ps(o.s)}) Tj ET`).join('\n') + '\n'; let objs = ['<< /Type /Catalog /Pages 2 0 R >>', '<< /Type /Pages /Kids [3 0 R] /Count 1 >>', '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 288 432] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>', '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>', `<< /Length ${bytes(stream).length} >>\nstream\n${stream}endstream`]; let s = '%PDF-1.4\n', offset = [0]; objs.forEach((o, i) => { offset.push(s.length); s += `${i + 1} 0 obj\n${o}\nendobj\n`; }); let start = s.length; s += 'xref\n0 6\n0000000000 65535 f \n' + offset.slice(1).map(o => String(o).padStart(10, '0') + ' 00000 n \n').join('') + `trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${start}\n%%EOF\n`; return bytes(s); }
+        // Minimal standards-compliant uncompressed ZIP for editable Word export.
+        const crcTable = Array.from({ length: 256 }, (_, i) => { let c = i; for (let k = 0; k < 8; k++)c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; return c >>> 0; }); function crc(a) { let c = 0xffffffff; for (let x of a) c = crcTable[(c ^ x) & 255] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; } function zip(files) { let local = [], central = [], offset = 0; for (let [name, raw] of Object.entries(files)) { let nm = bytes(name), a = typeof raw === 'string' ? bytes(raw) : raw, c = crc(a), h = new Uint8Array(30), v = new DataView(h.buffer); v.setUint32(0, 0x04034b50, true); v.setUint16(4, 20, true); v.setUint32(14, c, true); v.setUint32(18, a.length, true); v.setUint32(22, a.length, true); v.setUint16(26, nm.length, true); let ch = new Uint8Array(46), z = new DataView(ch.buffer); z.setUint32(0, 0x02014b50, true); z.setUint16(4, 20, true); z.setUint16(6, 20, true); z.setUint32(16, c, true); z.setUint32(20, a.length, true); z.setUint32(24, a.length, true); z.setUint16(28, nm.length, true); z.setUint32(42, offset, true); local.push(h, nm, a); central.push(ch, nm); offset += h.length + nm.length + a.length; } let cd = cat(central), end = new Uint8Array(22), v = new DataView(end.buffer); v.setUint32(0, 0x06054b50, true); v.setUint16(8, Object.keys(files).length, true); v.setUint16(10, Object.keys(files).length, true); v.setUint32(12, cd.length, true); v.setUint32(16, offset, true); return cat([...local, cd, end]); }
+        function pngBarcode(b, h) { let c = document.createElement('canvas'), u = b.dot * 3; c.width = b.modules * u; c.height = Math.round(h * 609 / 72); let ctx = c.getContext('2d'); ctx.fillStyle = 'white'; ctx.fillRect(0, 0, c.width, c.height); ctx.fillStyle = 'black'; let x = 10 * u, black = true; for (let n of b.runs) { if (black) ctx.fillRect(x, 0, n * u, c.height); x += n * u; black = !black; } return Uint8Array.from(atob(c.toDataURL('image/png').split(',')[1]), c => c.charCodeAt(0)); }
+        function docx(l) { const ns = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main', rel = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships', pkg = 'http://schemas.openxmlformats.org/package/2006/relationships', decl = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'; const tw = x => Math.round(x * 20), emu = x => Math.round(x * 12700); const para = v => `<w:p><w:pPr><w:jc w:val="${v.align === 'center' ? 'center' : 'left'}"/><w:spacing w:before="0" w:after="0" w:line="${tw(v.h)}" w:lineRule="exact"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/><w:b/><w:sz w:val="${Math.round(v.f * 2)}"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">${esc(v.s)}</w:t></w:r></w:p>`; let h = l.rows[3].h - 22, b = l.bc; let pic = `<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="0" w:after="0" w:line="${tw(h + 3)}" w:lineRule="exact"/></w:pPr><w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="${emu(b.w)}" cy="${emu(h)}"/><wp:docPr id="1" name="Code 128 barcode" descr="${esc(l.d.awb)}"/><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic><pic:nvPicPr><pic:cNvPr id="0" name="barcode.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rId1"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${emu(b.w)}" cy="${emu(h)}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>`; let border = ['top', 'left', 'bottom', 'right', 'insideH', 'insideV'].map(s => `<w:${s} w:val="single" w:sz="6" w:color="000000"/>`).join(''); const tc = (ls, span, extra = '') => `<w:tc><w:tcPr><w:tcW w:w="${span * 2680}" w:type="dxa"/>${span === 2 ? '<w:gridSpan w:val="2"/>' : ''}<w:vAlign w:val="center"/></w:tcPr>${extra}${ls.map(para).join('')}</w:tc>`; let rows = l.rows.map(r => `<w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="${tw(r.h)}" w:hRule="exact"/></w:trPr>${r.cols ? r.cols.map(ls => tc(ls, 1)).join('') : tc(r.lines, 2, r.barcode ? pic : '')}</w:tr>`).join(''); let xml = decl + `<w:document xmlns:w="${ns}" xmlns:r="${rel}" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:body><w:tbl><w:tblPr><w:tblW w:w="5360" w:type="dxa"/><w:jc w:val="center"/><w:tblBorders>${border}</w:tblBorders><w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="80" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="80" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="2680"/><w:gridCol w:w="2680"/></w:tblGrid>${rows}</w:tbl><w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/></w:pPr><w:r><w:rPr><w:sz w:val="2"/></w:rPr></w:r></w:p><w:sectPr><w:pgSz w:w="5760" w:h="8640"/><w:pgMar w:top="180" w:right="200" w:bottom="100" w:left="200" w:header="0" w:footer="0" w:gutter="0"/></w:sectPr></w:body></w:document>`; return zip({ '[Content_Types].xml': decl + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>', '_rels/.rels': decl + `<Relationships xmlns="${pkg}"><Relationship Id="rId1" Type="${rel}/officeDocument" Target="word/document.xml"/></Relationships>`, 'word/document.xml': xml, 'word/_rels/document.xml.rels': decl + `<Relationships xmlns="${pkg}"><Relationship Id="rId1" Type="${rel}/image" Target="media/barcode.png"/></Relationships>`, 'word/media/barcode.png': pngBarcode(b, h) }); }
+        function download(a, type, ext) { let blob = new Blob([a], { type }), url = URL.createObjectURL(blob), link = document.createElement('a'); link.href = url; link.download = 'TheArtStudio_' + current.d.awb.replace(/[^A-Za-z0-9_-]/g, '_') + '.' + ext; link.click(); setTimeout(() => URL.revokeObjectURL(url), 5000); }
+        $('form').addEventListener('submit', e => e.preventDefault()); $('form').addEventListener('input', update); $('print').onclick = () => { if (current) window.print(); }; $('pdf').onclick = () => { if (current) download(pdf(current), 'application/pdf', 'pdf'); }; $('word').onclick = () => { if (current) download(docx(current), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'docx'); }; $('clear').onclick = () => { for (let k of ['awb', 'amount', 'order', 'weight', 'name', 'address', 'city', 'state', 'pin', 'mobile']) $(k).value = ''; $('mode').value = 'COD'; update(); $('awb').focus(); }; $('save').onclick = () => { try { localStorage.setItem('the_art_studio_sender_v1', JSON.stringify(Object.fromEntries(senderIds.map(k => [k, $(k).value])))); $('saveStatus').textContent = 'Sender settings saved on this browser.'; } catch (e) { $('saveStatus').textContent = 'Browser storage unavailable. Sender settings remain editable.'; } }; try { let saved = JSON.parse(localStorage.getItem('the_art_studio_sender_v1') || 'null'); if (saved) for (let k of senderIds) if (typeof saved[k] === 'string') $(k).value = saved[k]; } catch (e) { } update();
+    </script>
+</body>
+
+</html>
